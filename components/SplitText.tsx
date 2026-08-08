@@ -48,7 +48,7 @@ export default function SplitText({
               {ch}
             </span>
           ))}
-          {w < words.length - 1 && <span className="char">{" "}</span>}
+          {w < words.length - 1 && <span className="char">{"\u00A0"}</span>}
         </span>
       ))}
     </span>

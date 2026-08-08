@@ -38,11 +38,17 @@ export default function SplitText({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // words are atomic inline-blocks so lines never break mid-word
   return (
     <span ref={ref} aria-label={text} className={className}>
-      {[...text].map((ch, i) => (
-        <span key={i} aria-hidden="true" className="char">
-          {ch === " " ? " " : ch}
+      {text.split(" ").map((word, w, words) => (
+        <span key={w} aria-hidden="true" className="inline-block whitespace-nowrap">
+          {[...word].map((ch, i) => (
+            <span key={i} className="char">
+              {ch}
+            </span>
+          ))}
+          {w < words.length - 1 && <span className="char">{" "}</span>}
         </span>
       ))}
     </span>

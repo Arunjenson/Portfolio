@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --animate-ticker: ticker 34s linear infinite;
+  --animate-flame: flame 1.6s ease-in-out infinite;
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes flame {
+    0%, 100% { transform: scaleY(0.55); }
+    50% { transform: scaleY(1); }
+  }
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* film grain */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* split-text characters */
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* cursor-following emerald spotlight (driven by --mx/--my) */
+.spot {
+  position: relative;
+}
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  border-radius: 12px;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(16, 185, 129, 0.1),
+    transparent 65%
+  );
+}
+.spot:hover::before {
+  opacity: 1;
+}
+
+/* light sweep across recognition cards */
+.sweep {
+  position: relative;
+  overflow: hidden;
+}
+.sweep::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -70%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+  transition: left 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+  z-index: 5;
+}
+.sweep:hover::before {
+  left: 120%;
+}
+
+/* logo latency bars drop on hover */
+.logo-bar {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-origin: bottom;
+}
+.logo-mark:hover .b1 { transform: scaleY(0.45); }
+.logo-mark:hover .b2 { transform: scaleY(0.7); }
+.logo-mark:hover .b3 { transform: scaleY(1); }
+
+/* easter egg: degraded mode */
+.degraded {
+  filter: blur(1.4px) saturate(0.55);
+  animation: jank 0.34s steps(2) infinite;
+}
+@keyframes jank {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(1.5px, -1px); }
+  50% { transform: translate(-1px, 1.5px); }
+  75% { transform: translate(1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* custom cursor */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 60;
+  border-radius: 9999px;
+  mix-blend-mode: difference;
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+}
+.cursor-ring {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  transition: width 0.22s, height 0.22s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker,
+  .animate-flame {
+    animation: none !important;
+  }
+  .degraded {
+    animation: none !important;
+    filter: none !important;
+  }
+}

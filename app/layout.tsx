@@ -1,0 +1,44 @@
+import type { Metadata } from "next";
+import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import UIProvider from "@/components/UIProvider";
+import SiteChrome from "@/components/SiteChrome";
+import { site } from "@/lib/content";
+import "./globals.css";
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolage",
+});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+});
+
+export const metadata: Metadata = {
+  title: site.title,
+  description: site.description,
+};
+
+// runs before paint: apply persisted theme (default dark) to avoid a flash
+const themeScript = `(function(){var t="dark";try{t=localStorage.getItem("theme")||"dark"}catch(e){}document.documentElement.classList.toggle("dark",t==="dark")})()`;
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body
+        className={`${bricolage.variable} ${inter.variable} ${jetbrains.variable} grain font-sans bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 transition-colors duration-300`}
+      >
+        <UIProvider>
+          <SiteChrome />
+          {children}
+        </UIProvider>
+      </body>
+    </html>
+  );
+}

@@ -104,6 +104,14 @@ export default function Hero() {
         <Reveal immediate delay={0.45}>
           <p className="font-mono text-[12px] text-emerald-600 dark:text-emerald-400 mb-6">
             {site.location}
+            <a
+              href={site.companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-dotted decoration-emerald-600/50 dark:decoration-emerald-400/50 underline-offset-[3px] hover:decoration-solid"
+            >
+              {site.company}
+            </a>
           </p>
         </Reveal>
 

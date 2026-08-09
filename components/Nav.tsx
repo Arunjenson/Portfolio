@@ -59,11 +59,24 @@ export default function Nav() {
         onClick={onLogoClick}
         className="logo-mark flex items-center gap-3"
       >
-        <svg width="30" height="30" viewBox="0 0 30 30" className="shrink-0" aria-hidden="true">
-          <rect width="30" height="30" rx="8" className="fill-stone-900 dark:fill-stone-100" />
-          <rect x="8" y="9" width="3.2" height="12" rx="1.6" className="logo-bar b1 fill-emerald-400 dark:fill-emerald-600" />
-          <rect x="13.4" y="13" width="3.2" height="8" rx="1.6" className="logo-bar b2 fill-emerald-400 dark:fill-emerald-600" />
-          <rect x="18.8" y="16.5" width="3.2" height="4.5" rx="1.6" className="logo-bar b3 fill-emerald-400 dark:fill-emerald-600" />
+        {/* same mark as app/icon.svg */}
+        <svg width="30" height="30" viewBox="0 0 32 32" className="shrink-0" aria-hidden="true">
+          <defs>
+            <linearGradient id="logoTile" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#1c1917" />
+              <stop offset="1" stopColor="#0c0a09" />
+            </linearGradient>
+            <linearGradient id="logoInk" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#6ee7b7" />
+              <stop offset="1" stopColor="#10b981" />
+            </linearGradient>
+          </defs>
+          <rect width="32" height="32" rx="7.5" fill="url(#logoTile)" />
+          <rect x=".5" y=".5" width="31" height="31" rx="7" fill="none" stroke="#10b981" className="logo-ring" />
+          <g fill="none" stroke="url(#logoInk)" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5.8 23 10.8 9 15.8 23M7.6 18.4H14" />
+            <path d="M24.6 9v9.4a3.6 3.6 0 0 1-3.6 3.6" />
+          </g>
         </svg>
         <span className="font-display font-medium text-[17px] tracking-tight">
           {site.name}

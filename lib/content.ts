@@ -3,7 +3,7 @@ export const site = {
   title: "Arun Jenson — Product Engineer | Performance & AI Tooling",
   description:
     "Product engineer building AI-agent tooling and fast web platforms. Cut LCP 59%, migrated 3,500+ pages to Next.js. Based in Chennai.",
-  url: "https://yourdomain.com", // TODO: real domain — used for canonical + OG URLs
+  url: "https://arunjenson.vercel.app", // canonical + OG base
   location: "Chennai, IN / SurveySparrow",
   linkedin: "https://www.linkedin.com/in/arun-jenson-86b43a191/",
   email: "REPLACE@email.com",

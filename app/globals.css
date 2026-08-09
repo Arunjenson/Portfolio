@@ -85,14 +85,12 @@ body {
   left: 120%;
 }
 
-/* logo latency bars drop on hover */
-.logo-bar {
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transform-origin: bottom;
+/* logo ring lights up on hover */
+.logo-ring {
+  stroke-opacity: 0.35;
+  transition: stroke-opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.logo-mark:hover .b1 { transform: scaleY(0.45); }
-.logo-mark:hover .b2 { transform: scaleY(0.7); }
-.logo-mark:hover .b3 { transform: scaleY(1); }
+.logo-mark:hover .logo-ring { stroke-opacity: 1; }
 
 /* easter egg: degraded mode */
 .degraded {

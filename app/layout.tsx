@@ -16,8 +16,37 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: site.title,
+  metadataBase: new URL(site.url),
+  title: { default: site.title, template: `%s — ${site.name}` },
   description: site.description,
+  keywords: [
+    "Arun Jenson",
+    "product engineer",
+    "frontend engineer",
+    "web performance",
+    "Core Web Vitals",
+    "Next.js",
+    "AI agent tooling",
+    "MCP",
+    "Chennai",
+  ],
+  authors: [{ name: site.name, url: site.linkedin }],
+  creator: site.name,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "profile",
+    url: "/",
+    siteName: site.name,
+    title: `${site.name} — Product Engineer`,
+    description: "Web performance, platform migrations, and AI-agent tooling.",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — Product Engineer`,
+    description: "Web performance, platform migrations, and AI-agent tooling.",
+  },
+  robots: { index: true, follow: true },
 };
 
 // runs before paint: apply persisted theme (default dark) to avoid a flash

@@ -84,7 +84,7 @@ function Portrait() {
           src={hero.portrait.src}
           alt={hero.portrait.alt}
           fill
-          priority
+          preload
           sizes="(max-width: 768px) 280px, 33vw"
           className="object-cover grayscale-[15%] transition-all duration-500 hover:grayscale-0 hover:scale-[1.03]"
           onError={() => setFailed(true)}

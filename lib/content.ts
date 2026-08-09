@@ -9,6 +9,14 @@ export const site = {
   resume: "#",
 };
 
+/* soon: true renders a "soon" badge instead of a link */
+export const navLinks = [
+  { label: "Work", href: "#work" },
+  { label: "Writing", soon: true },
+  { label: "Speaking", soon: true },
+  { label: "Contact", href: "#contact" },
+];
+
 export const hero = {
   headline: [
     { text: "I make slow things", accent: false },
@@ -22,7 +30,7 @@ export const hero = {
     { label: "See the work", href: "#work", primary: true },
     { label: "Get in touch", href: "#contact", primary: false },
   ],
-  portrait: { src: "/images/arun.jpg", alt: "Arun Jenson" },
+  portrait: { src: "/images/profile.avif", alt: "Arun Jenson" },
 };
 
 export const focusAreas = {
@@ -82,13 +90,13 @@ export const recognition = {
   items: [
     {
       title: "Cruising and Crushing It",
-      date: "Apr 2026",
+      date: "Mar 2026",
       body: "For the Core Web Vitals push that moved every URL into the green — a cross-team effort where performance stopped being a ticket and became a standard.",
       image: "/images/award-cruising.jpg",
     },
     {
       title: "Silent Soldier",
-      date: "Dec 2023",
+      date: "Nov 2023",
       body: "For consistent delivery in my first year on the team — the unglamorous work that keeps a platform standing while everything else ships on top of it.",
       image: "/images/award-silent-soldier.jpg",
     },

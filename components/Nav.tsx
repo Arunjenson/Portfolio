@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useUI } from "@/components/UIProvider";
-import { site, toasts } from "@/lib/content";
+import { navLinks, site, toasts } from "@/lib/content";
 
 export default function Nav() {
   const { theme, toggleTheme, toast, setPaletteOpen, reducedMotion } = useUI();
@@ -69,6 +69,31 @@ export default function Nav() {
           {site.name}
         </span>
       </a>
+
+      <div className="hidden md:flex items-center gap-6 text-[13.5px] absolute left-1/2 -translate-x-1/2">
+        {navLinks.map((l) =>
+          l.soon ? (
+            <span
+              key={l.label}
+              title="Coming soon"
+              className="flex items-center gap-1.5 text-stone-400 dark:text-stone-600 cursor-default"
+            >
+              {l.label}
+              <span className="font-mono text-[9px] uppercase tracking-wider text-amber-600 dark:text-amber-500 border border-amber-500/40 rounded-full px-1.5 py-px leading-[1.5]">
+                soon
+              </span>
+            </span>
+          ) : (
+            <a
+              key={l.label}
+              href={l.href}
+              className="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
+            >
+              {l.label}
+            </a>
+          )
+        )}
+      </div>
 
       <div className="flex items-center gap-3">
         <button

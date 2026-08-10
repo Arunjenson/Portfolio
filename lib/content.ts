@@ -8,7 +8,7 @@ export const site = {
   company: "SurveySparrow",
   companyUrl: "https://surveysparrow.com/",
   linkedin: "https://www.linkedin.com/in/arun-jenson-86b43a191/",
-  email: "REPLACE@email.com",
+  email: "arunjensondev@gmail.com",
   resume: "#",
 };
 

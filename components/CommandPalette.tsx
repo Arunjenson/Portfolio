@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useUI } from "@/components/UIProvider";
 import { commands, site } from "@/lib/content";
 
@@ -23,21 +24,16 @@ export default function CommandPalette() {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const cmds = useMemo(
     () => [
+      { label: commands.work, run: () => router.push("/work") },
       {
-        label: commands.work,
-        run: () =>
-          document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }),
+        label: commands.caseStudy,
+        run: () => router.push("/work/core-web-vitals"),
       },
-      {
-        label: commands.contact,
-        run: () =>
-          document
-            .getElementById("contact")
-            ?.scrollIntoView({ behavior: "smooth" }),
-      },
+      { label: commands.contact, run: () => router.push("/#contact") },
       {
         label: commands.linkedin,
         run: () => window.open(site.linkedin, "_blank", "noopener"),
@@ -46,7 +42,7 @@ export default function CommandPalette() {
       { label: commands.slow, run: degrade },
       { label: commands.turbo, run: toggleTurbo },
     ],
-    [toggleTheme, degrade, toggleTurbo]
+    [router, toggleTheme, degrade, toggleTurbo]
   );
 
   const filtered = cmds.filter((c) => fuzzy(query, c.label));

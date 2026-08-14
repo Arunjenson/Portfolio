@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useUI } from "@/components/UIProvider";
 import CommandPalette from "@/components/CommandPalette";
 import { toasts } from "@/lib/content";
@@ -26,19 +27,29 @@ export default function SiteChrome() {
   const ringRef = useRef<HTMLDivElement>(null);
   const [cursorOn, setCursorOn] = useState(false);
   const [fps, setFps] = useState<number | null>(null);
+  const pathname = usePathname();
 
-  /* scroll progress bar */
+  /* scroll progress bar — scoped to [data-progress] when a page marks one
+     (the case study marks its <article>, so the bar tracks reading, not page scroll) */
   useEffect(() => {
     const onScroll = () => {
       if (!barRef.current) return;
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      barRef.current.style.width =
-        (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+      const scope = document.querySelector<HTMLElement>("[data-progress]");
+      let pct: number;
+      if (scope) {
+        const top = scope.offsetTop;
+        const h = scope.offsetHeight - window.innerHeight;
+        pct = h > 0 ? ((window.scrollY - top) / h) * 100 : 0;
+      } else {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+      }
+      barRef.current.style.transform = `scaleX(${Math.min(Math.max(pct, 0), 100) / 100})`;
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   /* degraded easter egg: apply .degraded to <main> */
   useEffect(() => {
@@ -152,7 +163,7 @@ export default function SiteChrome() {
       <div
         ref={barRef}
         aria-hidden="true"
-        className="fixed top-0 left-0 h-[2px] w-0 bg-emerald-600 dark:bg-emerald-400 z-[45]"
+        className="fixed top-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-emerald-600 dark:bg-emerald-400 z-[45]"
       />
 
       {cursorOn && (

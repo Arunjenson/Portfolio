@@ -25,6 +25,24 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* native smooth anchor scrolling — the case-study section rail relies on it */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* hide the default disclosure marker on the mobile Contents summary */
+summary::-webkit-details-marker { display: none; }
+
+/* case-study rail: the playhead reads as a live monitoring probe */
+.rail-pulse {
+  animation: railPulse 2.6s cubic-bezier(0.2, 0.7, 0.2, 1) infinite;
+}
+@keyframes railPulse {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  70%  { transform: scale(3.2); opacity: 0; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+
 /* film grain */
 .grain::after {
   content: "";
@@ -130,9 +148,11 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .animate-ticker,
-  .animate-flame {
+  .animate-flame,
+  .rail-pulse {
     animation: none !important;
   }
+  .rail-pulse { opacity: 0 !important; }
   .degraded {
     animation: none !important;
     filter: none !important;

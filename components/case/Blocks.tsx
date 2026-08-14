@@ -66,7 +66,7 @@ export function Lede({ children }: { children: React.ReactNode }) {
   return (
     <Reveal>
       <div className="border-l-2 border-emerald-600 dark:border-emerald-400 pl-5 mb-12">
-        <p className="font-mono text-[11.5px] uppercase tracking-[0.1em] text-emerald-600 dark:text-emerald-400 mb-2.5">
+        <p className="font-mono font-medium text-[11.5px] uppercase tracking-[0.1em] text-emerald-600 dark:text-emerald-400 mb-2.5">
           At a glance
         </p>
         <p className="text-[17.5px] leading-[1.7] text-stone-800 dark:text-stone-200">
@@ -113,7 +113,7 @@ export function Readout({
           key={m.label}
           className="p-5 border-t sm:border-t-0 sm:border-l first:border-t-0 sm:first:border-l-0 border-stone-200 dark:border-stone-800"
         >
-          <dt className="font-mono text-[10.5px] uppercase tracking-[0.09em] text-stone-400 dark:text-stone-500 mb-2.5">
+          <dt className="font-mono font-medium text-[11px] uppercase tracking-[0.09em] text-stone-500 dark:text-stone-400 mb-2.5">
             {m.label}
           </dt>
           <dd className="font-mono text-[21px] text-emerald-600 dark:text-emerald-400 leading-none">
@@ -128,7 +128,7 @@ export function Readout({
             {m.value}
           </dd>
           {m.note && (
-            <p className="font-mono text-[10.5px] text-stone-400 dark:text-stone-500 mt-2.5">
+            <p className="font-mono font-medium text-[11px] text-stone-500 dark:text-stone-400 mt-2.5">
               {m.note}
             </p>
           )}
@@ -156,14 +156,14 @@ export function MetricBar({
   return (
     <Reveal className="my-8">
       <figure className="border border-stone-200 dark:border-stone-800 rounded-xl p-5">
-        <figcaption className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-[11px] uppercase tracking-[0.07em] text-stone-400 dark:text-stone-500 mb-4">
+        <figcaption className="flex flex-wrap items-baseline justify-between gap-2 font-mono font-medium text-[11.5px] uppercase tracking-[0.07em] text-stone-500 dark:text-stone-400 mb-4">
           <span>{caption}</span>
           {note && <span>{note}</span>}
         </figcaption>
         <div className="space-y-2">
           {rows.map((r) => (
-            <div key={r.tag} className="flex items-center gap-3 font-mono text-[11.5px]">
-              <span className="w-[68px] shrink-0 text-stone-400 dark:text-stone-500">
+            <div key={r.tag} className="flex items-center gap-3 font-mono font-medium text-[12px]">
+              <span className="w-[70px] shrink-0 text-stone-500 dark:text-stone-400">
                 {r.tag}
               </span>
               <span className="flex-1 h-2 rounded-full bg-stone-100 dark:bg-stone-900 overflow-hidden">
@@ -239,7 +239,7 @@ export function Aside({
         }`}
       >
         <p
-          className={`font-mono text-[10.5px] uppercase tracking-[0.09em] mb-3 ${
+          className={`font-mono font-medium text-[11px] uppercase tracking-[0.09em] mb-3 ${
             amber
               ? "text-amber-600 dark:text-amber-400"
               : "text-stone-500 dark:text-stone-400"

@@ -22,15 +22,15 @@ function Panel({ src, alt, state, tone = "soon", hint }: Panel) {
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 text-center p-5">
           {state && (
             <span
-              className={`font-mono text-[10px] uppercase tracking-[0.1em] border border-current rounded-full px-2.5 py-0.5 ${stateTone}`}
+              className={`font-mono font-medium text-[10.5px] uppercase tracking-[0.1em] border border-current rounded-full px-2.5 py-0.5 ${stateTone}`}
             >
               {state}
             </span>
           )}
-          <span className="font-mono text-[11px] text-stone-500 dark:text-stone-400 break-all">
+          <span className="font-mono font-medium text-[11.5px] text-stone-500 dark:text-stone-400 break-all">
             {src}
           </span>
-          <span className="text-[12px] leading-snug text-stone-400 dark:text-stone-500 max-w-[34ch]">
+          <span className="text-[12.5px] leading-snug text-stone-500 dark:text-stone-400 max-w-[34ch]">
             {hint}
           </span>
         </div>
@@ -69,7 +69,7 @@ export default function Figure({
             <Panel key={p.src} {...p} />
           ))}
         </div>
-        <figcaption className="flex flex-wrap gap-x-3 gap-y-1 items-baseline font-mono text-[11.5px] text-stone-400 dark:text-stone-500 mt-3">
+        <figcaption className="flex flex-wrap gap-x-3 gap-y-1 items-baseline font-mono font-medium text-[12px] text-stone-500 dark:text-stone-400 mt-3">
           <span className="text-emerald-600 dark:text-emerald-400 shrink-0">{id}</span>
           <span>{caption}</span>
         </figcaption>

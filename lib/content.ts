@@ -14,10 +14,9 @@ export const site = {
 
 /* soon: true renders a "soon" badge instead of a link */
 export const navLinks = [
-  { label: "Work", href: "#work" },
+  { label: "Work", href: "/work" },
   { label: "Writing", soon: true },
-  { label: "Speaking", soon: true },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export const hero = {
@@ -42,7 +41,7 @@ export const focusAreas = {
   items: [
     {
       title: "Web performance",
-      body: "Core Web Vitals, rendering strategy, and the measurement discipline to prove something actually moved — not just felt faster.",
+      body: "Core Web Vitals on real devices, not on my laptop. Bundle weight, rendering paths, and the patience to prove a fix landed in field data.",
     },
     {
       title: "Platform migrations",
@@ -50,7 +49,7 @@ export const focusAreas = {
     },
     {
       title: "AI-agent tooling",
-      body: "MCP-based systems that let agents operate inside real production workflows — with permissions, audit trails, and an undo button.",
+      body: "MCP servers and coding agents that remove categories of work — content ops, CSS splitting, code review — rather than making the same work marginally faster.",
     },
   ],
 };
@@ -73,15 +72,23 @@ export const work = {
   title: "Selected work",
   items: [
     {
-      title: "Cutting LCP 59% without touching the rankings",
-      status: "writing",
-      body: "A 1M-visitor marketing site was failing Core Web Vitals on mobile, and a redesign was off the table. What shipped instead was a re-architecture of the interaction path — selective hydration, transitions, and replacing a component library we'd outgrown.",
-      metrics: ["LCP 2.9s → 1.2s", "INP 800ms → 280ms", "75% URLs passing"],
+      slug: "core-web-vitals",
+      title: "We got desktop green. Then mobile refused to move.",
+      status: "read",
+      href: "/work/core-web-vitals",
+      body: "Two years of Core Web Vitals across 3,500 pages — first as one of the engineers, then leading it. Mobile is the strictly harder constraint, so it became the only thing we measured against. LCP, INP, CLS and the blocking time underneath them.",
+      metrics: [
+        "900+ URLs failing → passing",
+        "homepage INP 350ms+ → 162ms",
+        "blog INP 149ms",
+      ],
     },
     {
-      title: "Deleting a manual workflow with an MCP server",
+      slug: "agent-tooling",
+      title: "Deleting work instead of doing it faster",
       status: "writing",
-      body: "Every content change used to route through a human clicking through an admin panel. Now AI agents create, update, and audit content directly — role-based permissions enforced, every action revertible.",
+      href: null,
+      body: "An MCP server so marketing operates the CMS through agents instead of an admin panel. An agent that traces a route's imports and rewrites its Tailwind config. A review agent that reads the diff. Each one removes a category of manual work rather than speeding it up.",
       metrics: ["RBAC-enforced", "full audit + revert", "rolling out now"],
     },
   ],
@@ -118,7 +125,9 @@ export const footer = {
 };
 
 export const commands = {
-  work: "View selected work",
+  work: "View all work",
+  caseStudy: "Read: Core Web Vitals case study",
+  writing: "Writing (soon)",
   contact: "Get in touch",
   linkedin: "Open LinkedIn",
   theme: "Toggle theme",

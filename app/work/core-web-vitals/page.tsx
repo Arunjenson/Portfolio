@@ -171,6 +171,23 @@ export default function CoreWebVitals() {
 
           {/* ---- 02 ---- */}
           <Section id="mobile">
+            {/* leads the section rather than closing it — this image is the section's
+                thesis, so the evidence lands before the explanation */}
+            <Figure
+              id="fig 01 · baseline"
+              caption="Desktop green, mobile stuck. Where I picked it up."
+              panels={[
+                {
+                  src: `${IMG}/baseline.png`,
+                  alt: "Search Console Core Web Vitals, February 2025. Mobile: 0 poor URLs, 1,666 needing improvement, 59 good. Desktop: 0 poor, 0 needing improvement, 1,724 good.",
+                  state: "february 2025",
+                  tone: "bad",
+                  aspect: "960/770",
+                  hint: "Search Console Core Web Vitals — the mobile and desktop cards side by side, mobile at 1,666 needing improvement against 59 good, desktop entirely green",
+                },
+              ]}
+            />
+
             <Reveal>
               <P>
                 That split is the whole story, and most performance write-ups skip it.
@@ -192,26 +209,6 @@ export default function CoreWebVitals() {
               </P>
             </Reveal>
 
-            <Figure
-              id="fig 01 · baseline"
-              caption="Desktop green, mobile stuck. Where I picked it up."
-              panels={[
-                {
-                  src: `${IMG}/baseline-desktop.png`,
-                  alt: "Desktop Core Web Vitals passing",
-                  state: "desktop",
-                  tone: "good",
-                  hint: "PageSpeed or Search Console, desktop — green",
-                },
-                {
-                  src: `${IMG}/baseline-mobile.png`,
-                  alt: "Mobile Core Web Vitals in Needs improvement",
-                  state: "mobile",
-                  tone: "bad",
-                  hint: "Same date, mobile — stuck in Needs improvement",
-                },
-              ]}
-            />
           </Section>
 
           {/* ---- 03 ---- */}
@@ -236,19 +233,6 @@ export default function CoreWebVitals() {
                 that has none to spare.
               </P>
             </Reveal>
-
-            <Figure
-              id="fig 02 · bundle-analyzer"
-              caption="What was actually shipping, before I stopped guessing."
-              panels={[
-                {
-                  src: `${IMG}/bundle-analyzer.png`,
-                  alt: "Bundle analyzer treemap",
-                  state: "optional",
-                  hint: "Bundle analyzer treemap — the pricing bundle inside the signup module, or Framer Motion before removal",
-                },
-              ]}
-            />
 
             <Reveal>
               <SubAnchor>Request discovery</SubAnchor>
@@ -306,22 +290,24 @@ export default function CoreWebVitals() {
             </Reveal>
 
             <Figure
-              id="fig 03 · gtm-comparison"
-              caption="Same page, tags loading versus deferred."
+              id="fig 02 · gtm-comparison"
+              caption="Same page, same device, tags loading versus deferred. Lighthouse on an emulated Moto G Power, 8 April 2025."
               panels={[
                 {
                   src: `${IMG}/gtm-before.png`,
-                  alt: "Performance trace with all tags loading",
-                  state: "tags loading",
+                  alt: "Lighthouse report with all tags loading on page load: performance 32, Total Blocking Time 1,960 ms, LCP 8.4 s, FCP 3.4 s, Speed Index 10.0 s.",
+                  state: "tags on load",
                   tone: "bad",
-                  hint: "INP debugger or performance trace with all 48 tags on load",
+                  aspect: "17/10",
+                  hint: "Lighthouse run with all 48 tags on load",
                 },
                 {
                   src: `${IMG}/gtm-after.png`,
-                  alt: "Performance trace with tags deferred",
+                  alt: "Lighthouse report with tags deferred to first interaction: performance 87, Total Blocking Time 110 ms, LCP 2.9 s, FCP 2.7 s, Speed Index 4.5 s.",
                   state: "tags deferred",
                   tone: "good",
-                  hint: "Same page, tags loading after first interaction",
+                  aspect: "17/10",
+                  hint: "Same page and device, tags loading after first interaction",
                 },
               ]}
             />
@@ -338,6 +324,15 @@ export default function CoreWebVitals() {
                 exactly the window that gets measured. Blocking time went from red to green.
               </P>
             </Reveal>
+
+            <MetricBar
+              caption="Total Blocking Time"
+              note="lighthouse · emulated Moto G Power"
+              rows={[
+                { tag: "on load", value: "1,960ms", pct: 100, tone: "bad" },
+                { tag: "deferred", value: "110ms", pct: 6, tone: "good" },
+              ]}
+            />
 
             <PullQuote>
               The best performance fixes are rarely clever. They’re usually a question about
@@ -372,26 +367,6 @@ export default function CoreWebVitals() {
                 true.
               </P>
             </Reveal>
-
-            <Figure
-              id="fig 04 · inp-throttling"
-              caption="The bar we held: under 200ms at 20×, not 6×."
-              panels={[
-                {
-                  src: `${IMG}/inp-6x.png`,
-                  alt: "INP measured at 6× CPU throttling",
-                  state: "6× throttle",
-                  hint: "Passing at Google’s bar",
-                },
-                {
-                  src: `${IMG}/inp-20x.png`,
-                  alt: "INP measured at 20× CPU throttling",
-                  state: "20× throttle",
-                  tone: "good",
-                  hint: "Still under 200ms at the bar we actually held",
-                },
-              ]}
-            />
 
             <Reveal>
               <P>
@@ -441,6 +416,23 @@ export default function CoreWebVitals() {
                 already finished.
               </p>
             </Aside>
+
+            {/* same Search Console view as fig 01, two months later — the two frame
+                identically on purpose, so the reader compares rather than re-reads */}
+            <Figure
+              id="fig 03 · first-inp-fix"
+              caption="April 2025 — 992 mobile URLs good, up from 59 in February. The same view as fig 01, two months on."
+              panels={[
+                {
+                  src: `${IMG}/first-inp-fix.png`,
+                  alt: "Search Console Core Web Vitals, April 2025. Mobile: 0 poor URLs, 1,211 needing improvement, 992 good — the good line jumping vertically after the site-wide INP fix. Desktop: 2,188 good.",
+                  state: "april 2025",
+                  tone: "good",
+                  aspect: "960/770",
+                  hint: "The same Search Console Core Web Vitals view as fig 01, two months on",
+                },
+              ]}
+            />
 
             <Reveal>
               <P>
@@ -505,27 +497,6 @@ export default function CoreWebVitals() {
               </P>
             </Reveal>
 
-            <Figure
-              id="fig 05 · blog"
-              caption="Fifteen hundred posts whose contents are authored, not coded — and where they landed."
-              panels={[
-                {
-                  src: `${IMG}/blog-shortcodes.png`,
-                  alt: "A blog post rendered from CMS shortcodes",
-                  state: "shortcodes",
-                  tone: "bad",
-                  hint: "A post as authored — template previews, GIFs, CTAs, forms injected from the CMS",
-                },
-                {
-                  src: `${IMG}/blog-inp.png`,
-                  alt: "Blog INP field data",
-                  state: "field data",
-                  tone: "good",
-                  hint: "Blog INP settling at 149ms, or the Search Console green crossover",
-                },
-              ]}
-            />
-
             <Reveal>
               <SubAnchor>The fastest feedback loop we had</SubAnchor>
               <P>
@@ -571,18 +542,6 @@ export default function CoreWebVitals() {
               </P>
             </Reveal>
 
-            <Figure
-              id="fig 06 · cls-regression"
-              caption="A marketing feature, measured as a performance regression."
-              panels={[
-                {
-                  src: `${IMG}/cls-banner.png`,
-                  alt: "Search Console Good URL drop after the region banner shipped",
-                  state: "optional",
-                  hint: "The Search Console Good-URL drop when the region banner shipped — or the Slack bot post that caught it",
-                },
-              ]}
-            />
           </Section>
 
           {/* ---- 08 ---- */}
@@ -633,27 +592,6 @@ export default function CoreWebVitals() {
                 command, any route.
               </P>
             </Reveal>
-
-            <Figure
-              id="fig 07 · css-split-before-after"
-              caption="One route’s Tailwind config, before and after the agent."
-              panels={[
-                {
-                  src: `${IMG}/css-split-before.png`,
-                  alt: "Tailwind config with a broad content glob",
-                  state: "before",
-                  tone: "bad",
-                  hint: "The broad glob — ~500 components scanned per route",
-                },
-                {
-                  src: `${IMG}/css-split-after.png`,
-                  alt: "Tailwind config listing only the route's real imports",
-                  state: "after",
-                  tone: "good",
-                  hint: "Rewritten config: only what the route imports",
-                },
-              ]}
-            />
 
             <Reveal>
               <P>
@@ -727,15 +665,16 @@ export default function CoreWebVitals() {
             </Reveal>
 
             <Figure
-              id="fig 08 · gsc-900"
-              caption="April 2025 — 900+ mobile URLs cross into passing."
+              id="fig 04 · all-green"
+              caption="April 2026 — mobile and desktop both fully green. 1,581 good URLs, none needing improvement."
               panels={[
                 {
-                  src: `${IMG}/gsc-900.png`,
-                  alt: "Search Console mobile Core Web Vitals crossing into passing",
-                  state: "result",
+                  src: `${IMG}/final-cwv.png`,
+                  alt: "Search Console Core Web Vitals, April 2026. Mobile: 0 poor URLs, 0 needing improvement, 1,581 good. Desktop identical. The third point in the sequence after February 2025 and April 2025.",
+                  state: "april 2026",
                   tone: "good",
-                  hint: "Search Console mobile Core Web Vitals — the April 2025 crossover into passing",
+                  aspect: "990/794",
+                  hint: "Search Console Core Web Vitals, both cards fully green",
                 },
               ]}
             />

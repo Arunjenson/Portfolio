@@ -9,6 +9,8 @@ type PanelProps = {
   state?: string;
   tone?: "bad" | "good" | "soon";
   hint: string;
+  /* charts and reports are wider than 16:10 — override rather than crop them */
+  aspect?: string;
 };
 
 /* Resolved at build time, so a missing asset costs nothing at runtime — no
@@ -16,7 +18,7 @@ type PanelProps = {
 const hasFile = (src: string) =>
   fs.existsSync(path.join(process.cwd(), "public", src));
 
-function Panel({ src, alt, state, tone = "soon", hint }: PanelProps) {
+function Panel({ src, alt, state, tone = "soon", hint, aspect = "16/10" }: PanelProps) {
   const stateTone = {
     bad: "text-red-600 dark:text-red-400",
     good: "text-emerald-600 dark:text-emerald-400",
@@ -24,14 +26,19 @@ function Panel({ src, alt, state, tone = "soon", hint }: PanelProps) {
   }[tone];
 
   return (
-    <div className="relative aspect-[16/10] bg-stone-100/70 dark:bg-stone-900/60 border-t sm:border-t-0 sm:border-l first:border-t-0 sm:first:border-l-0 border-stone-200 dark:border-stone-800">
+    <div
+      style={{ aspectRatio: aspect }}
+      className="relative bg-stone-100/70 dark:bg-stone-900/60 border-t sm:border-t-0 sm:border-l first:border-t-0 sm:first:border-l-0 border-stone-200 dark:border-stone-800"
+    >
       {hasFile(src) ? (
         <Image
           src={src}
           alt={alt}
           fill
           sizes="(max-width: 640px) 100vw, 760px"
-          className="object-cover"
+          /* contain, not cover — every asset here is a screenshot of a chart or
+             report, and cropping one loses the data it exists to show */
+          className="object-contain"
         />
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 text-center p-5">
@@ -63,6 +70,8 @@ export default function Figure({
   caption: string;
   panels: PanelProps[];
 }) {
+  /* no negative-margin breakout: figures share the article's measure so every block
+     on the page — prose, bars, asides, readouts, figures — has one left and right edge */
   return (
     <Reveal className="my-10">
       <figure>

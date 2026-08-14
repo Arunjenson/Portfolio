@@ -5,3 +5,6 @@ out/
 next-env.d.ts
 .DS_Store
 .env*
+
+# uncropped screenshot sources — kept locally, never served
+assets-src/

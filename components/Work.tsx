@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Spotlight from "@/components/Spotlight";
 import SectionHeading from "@/components/SectionHeading";
@@ -11,17 +12,29 @@ const FLAME_BARS = [
 export default function Work() {
   return (
     <section id="work" className="mb-20 sm:mb-24 scroll-mt-8">
-      <SectionHeading num={work.num} title={work.title} />
+      <SectionHeading num={work.num} title={work.title} href="/work" />
       <div className="space-y-4">
         {work.items.map((item, idx) => (
           <Reveal key={item.title}>
             <Spotlight className="group border border-stone-200 dark:border-stone-800 rounded-xl p-6 sm:p-7 hover:border-emerald-600/50 dark:hover:border-emerald-400/50 transition-colors">
-              <article>
+              <article className="relative">
                 <div className="flex flex-wrap items-baseline justify-between gap-3 mb-3">
                   <h3 className="font-display text-[19px] font-medium tracking-tight">
-                    {item.title}
+                    {item.href ? (
+                      <Link href={item.href} className="after:absolute after:inset-0">
+                        {item.title}
+                      </Link>
+                    ) : (
+                      item.title
+                    )}
                   </h3>
-                  <span className="font-mono text-[11px] text-amber-600 dark:text-amber-400 border border-amber-600/40 dark:border-amber-400/40 rounded-full px-2.5 py-0.5">
+                  <span
+                    className={`font-mono text-[11px] rounded-full px-2.5 py-0.5 border ${
+                      item.href
+                        ? "text-emerald-600 dark:text-emerald-400 border-emerald-600/40 dark:border-emerald-400/40"
+                        : "text-amber-600 dark:text-amber-400 border-amber-600/40 dark:border-amber-400/40"
+                    }`}
+                  >
                     {item.status}
                   </span>
                 </div>

@@ -1,12 +1,15 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useUI } from "@/components/UIProvider";
 import { navLinks, site, toasts } from "@/lib/content";
 
 export default function Nav() {
   const { theme, toggleTheme, toast, setPaletteOpen, reducedMotion } = useUI();
+  const pathname = usePathname();
   const clicks = useRef(0);
   const clickTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const logoRef = useRef<HTMLAnchorElement>(null);
@@ -38,7 +41,9 @@ export default function Nav() {
     toast(toasts.burst, 2200);
   };
 
+  /* off the homepage the logo just goes home; the burst is a homepage easter egg */
   const onLogoClick = (e: React.MouseEvent) => {
+    if (pathname !== "/") return;
     e.preventDefault();
     clicks.current++;
     clearTimeout(clickTimer.current);
@@ -53,9 +58,9 @@ export default function Nav() {
 
   return (
     <nav className="flex items-center justify-between py-7 relative z-10">
-      <a
+      <Link
         ref={logoRef}
-        href="#"
+        href="/"
         onClick={onLogoClick}
         className="logo-mark flex items-center gap-3"
       >
@@ -81,9 +86,9 @@ export default function Nav() {
         <span className="font-display font-medium text-[17px] tracking-tight">
           {site.name}
         </span>
-      </a>
+      </Link>
 
-      <div className="hidden md:flex items-center gap-6 text-[13.5px] absolute left-1/2 -translate-x-1/2">
+      <div className="hidden sm:flex items-center gap-6 text-[13.5px] absolute left-1/2 -translate-x-1/2">
         {navLinks.map((l) =>
           l.soon ? (
             <span
@@ -97,13 +102,18 @@ export default function Nav() {
               </span>
             </span>
           ) : (
-            <a
+            <Link
               key={l.label}
-              href={l.href}
-              className="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
+              href={l.href!}
+              aria-current={pathname === l.href ? "page" : undefined}
+              className={`transition-colors hover:text-stone-900 dark:hover:text-stone-100 ${
+                pathname === l.href
+                  ? "text-stone-900 dark:text-stone-100"
+                  : "text-stone-500 dark:text-stone-400"
+              }`}
             >
               {l.label}
-            </a>
+            </Link>
           )
         )}
       </div>

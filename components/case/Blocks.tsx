@@ -106,13 +106,17 @@ export function Readout({
 }: {
   items: { label: string; value: string; was?: string; note?: string }[];
 }) {
+  /* gap-px over a tinted ground draws the dividers, so cells can wrap at any count */
   return (
-    <dl className="grid grid-cols-1 sm:grid-cols-3 border border-stone-200 dark:border-stone-800 rounded-xl overflow-hidden bg-white/60 dark:bg-stone-900/40">
+    <dl
+      className={`grid grid-cols-1 gap-px bg-stone-200 dark:bg-stone-800 border border-stone-200 dark:border-stone-800 rounded-xl overflow-hidden ${
+        items.length === 4
+          ? "sm:grid-cols-2 lg:grid-cols-4"
+          : "sm:grid-cols-3"
+      }`}
+    >
       {items.map((m) => (
-        <div
-          key={m.label}
-          className="p-5 border-t sm:border-t-0 sm:border-l first:border-t-0 sm:first:border-l-0 border-stone-200 dark:border-stone-800"
-        >
+        <div key={m.label} className="p-5 bg-white dark:bg-stone-900">
           <dt className="font-mono font-medium text-[11px] uppercase tracking-[0.09em] text-stone-500 dark:text-stone-400 mb-2.5">
             {m.label}
           </dt>

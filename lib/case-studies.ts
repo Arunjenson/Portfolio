@@ -31,10 +31,16 @@ export const coreWebVitals: CaseStudy = {
   meta: "2024–present · Performance",
   readingTime: "8 min read",
   description:
-    "Two years of Core Web Vitals across 3,500 pages. LCP, INP, CLS and blocking time — 900+ URLs moved from failing to passing on mobile.",
+    "Two years of Core Web Vitals across 3,500 pages. LCP, INP, CLS and blocking time — 900+ URLs moved from failing to passing and 75% into the passing range on mobile.",
   metrics: [
     { label: "URLs failing → passing", value: "900+", note: "mobile, first wave" },
     { label: "Homepage INP", value: "162ms", was: "350ms+", note: "field data" },
+    {
+      label: "Demo flow INP",
+      value: "280ms",
+      was: "800ms",
+      note: "at 20× CPU throttling",
+    },
     {
       label: "Blog INP · 1,500 posts",
       value: "149ms",

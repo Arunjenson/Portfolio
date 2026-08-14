@@ -88,14 +88,17 @@ export default function CoreWebVitals() {
       <div className="grid xl:grid-cols-[168px_minmax(0,1fr)] gap-y-0 xl:gap-x-14 items-start mt-14 sm:mt-20">
         <SectionNav />
 
-        <article data-progress className="max-w-[68ch] pb-4">
+        {/* min-w-0: a grid item defaults to min-width:auto and would otherwise be
+            widened by the table instead of letting it scroll in its own container */}
+        <article data-progress className="min-w-0 max-w-[68ch] pb-4">
           <Lede>
             A 3,500-page marketing site taking a million visits a month, failing Core Web
             Vitals. No redesign allowed, no SEO regression acceptable. I worked on it from
             2024 as one of the engineers, then led it from 2025 when mobile stalled: LCP,
             INP, CLS and the blocking time underneath them, across eighteen modules. 900+
-            URLs moved from failing to passing, and by the end the fixes had turned into
-            standards and the standards into tooling.
+            URLs moved from failing to passing and 75% of URLs into the passing range on
+            mobile — and by the end the fixes had turned into standards and the standards
+            into tooling.
           </Lede>
 
           <Reveal>
@@ -120,7 +123,7 @@ export default function CoreWebVitals() {
           {/* ---- 01 ---- */}
           <Section id="first-lesson">
             <Reveal>
-              <P>My piece was templates, the largest module on the site.</P>
+              <P>My piece was templates, the second-largest module on the site.</P>
               <P>
                 We had Next.js streaming enabled on template inner pages, showing a loading
                 UI while content resolved. It’s a feature you turn on to make a page feel
@@ -137,7 +140,7 @@ export default function CoreWebVitals() {
             </Reveal>
 
             <MetricBar
-              caption="Template LCP"
+              caption="Template LCP · desktop"
               note="over ~12 months"
               rows={[
                 { tag: "before", value: "2.9s", pct: 100, tone: "bad" },
@@ -387,6 +390,24 @@ export default function CoreWebVitals() {
                   tone: "good",
                   hint: "Still under 200ms at the bar we actually held",
                 },
+              ]}
+            />
+
+            <Reveal>
+              <P>
+                Measured against that bar, the demo flow — the most interaction-heavy path on
+                the site — came down from <B>800ms to 280ms</B>. Not passing Google’s
+                threshold on a good laptop. Passing it on a device being deliberately
+                punished.
+              </P>
+            </Reveal>
+
+            <MetricBar
+              caption="Demo flow INP"
+              note="at 20× CPU throttling"
+              rows={[
+                { tag: "before", value: "800ms", pct: 100, tone: "bad" },
+                { tag: "after", value: "280ms", pct: 35, tone: "good" },
               ]}
             />
 
@@ -683,12 +704,12 @@ export default function CoreWebVitals() {
                     label: "Template LCP",
                     value: "1.2s",
                     was: "2.9s",
-                    note: "largest module on the site",
+                    note: "desktop · second-largest module",
                   },
                   {
-                    label: "URL groups green",
-                    value: "5",
-                    note: "mobile, blog first and largest",
+                    label: "URLs into passing range",
+                    value: "75%",
+                    note: "mobile, across five URL groups",
                   },
                 ]}
               />
@@ -697,9 +718,11 @@ export default function CoreWebVitals() {
             <Reveal>
               <P>
                 900+ URLs from failing to passing on mobile in the first wave. Homepage INP
-                350ms+ → 162ms, blog averaging 149ms, 80% of mobile users on good INP.
-                Template LCP 2.9s → 1.2s. Blocking time red to green. Five URL groups green on
-                mobile — blog first and largest among them — and desktop green throughout.
+                350ms+ → 162ms, blog averaging 149ms, 80% of mobile users on good INP. Demo
+                flow INP 800ms → 280ms at 20× throttling. Template LCP 2.9s → 1.2s. Blocking
+                time red to green. <B>75% of URLs into the passing range on mobile</B>, across
+                five URL groups — blog first and largest among them — and desktop green
+                throughout.
               </P>
             </Reveal>
 

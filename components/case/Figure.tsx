@@ -1,15 +1,22 @@
-"use client";
-
-import { useState } from "react";
+import fs from "node:fs";
+import path from "node:path";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 
-type Panel = { src: string; alt: string; state?: string; tone?: "bad" | "good" | "soon"; hint: string };
+type PanelProps = {
+  src: string;
+  alt: string;
+  state?: string;
+  tone?: "bad" | "good" | "soon";
+  hint: string;
+};
 
-/* Renders a labelled placeholder until the file lands in /public/images/cwv/.
-   Same onError fallback as Portrait and AwardImage on the homepage. */
-function Panel({ src, alt, state, tone = "soon", hint }: Panel) {
-  const [failed, setFailed] = useState(false);
+/* Resolved at build time, so a missing asset costs nothing at runtime — no
+   request, no 400, no client-side onError. Drop the file in and rebuild. */
+const hasFile = (src: string) =>
+  fs.existsSync(path.join(process.cwd(), "public", src));
+
+function Panel({ src, alt, state, tone = "soon", hint }: PanelProps) {
   const stateTone = {
     bad: "text-red-600 dark:text-red-400",
     good: "text-emerald-600 dark:text-emerald-400",
@@ -18,7 +25,15 @@ function Panel({ src, alt, state, tone = "soon", hint }: Panel) {
 
   return (
     <div className="relative aspect-[16/10] bg-stone-100/70 dark:bg-stone-900/60 border-t sm:border-t-0 sm:border-l first:border-t-0 sm:first:border-l-0 border-stone-200 dark:border-stone-800">
-      {failed ? (
+      {hasFile(src) ? (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(max-width: 640px) 100vw, 760px"
+          className="object-cover"
+        />
+      ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 text-center p-5">
           {state && (
             <span
@@ -34,15 +49,6 @@ function Panel({ src, alt, state, tone = "soon", hint }: Panel) {
             {hint}
           </span>
         </div>
-      ) : (
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="(max-width: 640px) 100vw, 760px"
-          className="object-cover"
-          onError={() => setFailed(true)}
-        />
       )}
     </div>
   );
@@ -55,7 +61,7 @@ export default function Figure({
 }: {
   id: string;
   caption: string;
-  panels: Panel[];
+  panels: PanelProps[];
 }) {
   return (
     <Reveal className="my-10">

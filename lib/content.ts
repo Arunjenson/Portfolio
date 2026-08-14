@@ -9,7 +9,6 @@ export const site = {
   companyUrl: "https://surveysparrow.com/",
   linkedin: "https://www.linkedin.com/in/arun-jenson-86b43a191/",
   email: "arunjensondev@gmail.com",
-  resume: "#",
 };
 
 /* soon: true renders a "soon" badge instead of a link */
@@ -79,8 +78,8 @@ export const work = {
       body: "Two years of Core Web Vitals across 3,500 pages — first as one of the engineers, then leading it. Mobile is the strictly harder constraint, so it became the only thing we measured against. LCP, INP, CLS and the blocking time underneath them.",
       metrics: [
         "900+ URLs failing → passing",
-        "homepage INP 350ms+ → 162ms",
-        "blog INP 149ms",
+        "75% of URLs passing on mobile",
+        "demo flow INP 800ms → 280ms",
       ],
     },
     {
@@ -120,7 +119,6 @@ export const footer = {
   links: [
     { label: "LinkedIn", href: site.linkedin, external: true },
     { label: "Email", href: `mailto:${site.email}`, external: false },
-    { label: "Résumé", href: site.resume, external: false },
   ],
 };
 

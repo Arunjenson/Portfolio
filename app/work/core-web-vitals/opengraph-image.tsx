@@ -36,9 +36,9 @@ export default function Image() {
         <div style={{ display: "flex", gap: 28, fontSize: 24, color: "#a8a29e" }}>
           <span>900+ URLs passing</span>
           <span style={{ color: "#44403c" }}>·</span>
-          <span>INP 350ms+ → 162ms</span>
+          <span>75% into passing range</span>
           <span style={{ color: "#44403c" }}>·</span>
-          <span>blog INP 149ms</span>
+          <span>INP 800ms → 280ms</span>
         </div>
       </div>
     ),
